@@ -1,0 +1,61 @@
+Assume all users are equally divided between four floors.
+
+24.113.0.0/20
+
+=== IP Assignment in network ===
+
+Load Sharing router : 24.113.0.0/30 1, 5
+
+Gateway Router : 24.113.0.0/30 subnet 9,10
+
+Server Floor Router : 24.113.0.0/30 13,14
+
+Floor 1 Router : 24.114.0.0/30 17,18
+
+Floor 2 Router : 24.114.0.0/30 21,22
+
+Other Floor Router : 24.113.0.0/30 25,26
+
+Floor 3 Router : 24.113.0.0/30 29,30
+
+Floor 4 Router : 24.113.0.0/30 33,34
+
+Internal Server IPs : 24.113.1.2 - 24.113.1.126 == Gateway IP : 24.113.1.1/25
+
+Floor 1 PCs IPs : 24.113.1.130 - 24.113.5.254 == Gateway IP : 24.113.1.129/25
+
+External Server IPs : 24.113.2.2 - 24.113.2.126 == Gateway IP : 24.113.2.1/25
+
+Floor 2 PCs IPs : 24.113.2.130 - 24.113.2.254 == Gateway IP : 24.113.2.129/25
+
+Floor 3 PCs IPs : 24.113.3.2 - 24.113.3.126 == Gateway IP : 24.113.3.1/25
+
+Floor 4 PCs IPs : 24.113.3.130 - 24.113.4.254 == Gateway IP : 24.113.3.129/25
+
+===Network protocols ===
+
+=> Internal network protocol OSPF 1 on 
+1) Gateway Router
+2) Server Floor Router
+3) Floor 1 router
+4) Floor 2 Router
+5) Other Foloor Router
+6) Floor 3 Router
+7) Floor 4 Router
+
+=> External Network Protocol BGP on
+1) Load Balancing Router to ISP connection
+
+===VLAN configuration:===
+
+=>vlan number is first ip of subnet
+
+VLAN 10 => Webpage Servers to Server Floor Router
+VLAN 20 => Online Order Servers to Server Floor Router
+
+=== Extended ACL ===
+=> Server floor router for external servers security measure
+=> Floor 1 router for internal server security measure
+
+=== Other ===
+Floor network topology is assumed as wireless connectivity
